@@ -1,0 +1,180 @@
+<!doctype html>
+{% assign all_categories = "" | split: ',' %}
+{% assign all_ingredients = "" | split: ',' %}
+{% for mypage in site.pages %}
+  {% for mycategory in mypage.categories %}
+    {% assign all_categories = all_categories | push: mycategory | uniq | sort %}
+  {% endfor %}
+  {% for myingredient in mypage.ingredients %}
+    {% assign all_ingredients = all_ingredients | push: myingredient | uniq | sort %}
+  {% endfor %}
+{% endfor %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-11743206-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-11743206-2');
+    </script>
+  </head>
+  <body style="background-color:#efefef;">
+<style>
+@font-face {
+    font-family: 'Harrington-Regular';
+    src:  url('/assets/fonts/Harrington-Regular.ttf.woff') format('woff'),
+    url('/assets/fonts/Harrington-Regular.ttf.svg#Harrington-Regular') format('svg'),
+    url('/assets/fonts/Harrington-Regular.ttf.eot'),
+    url('/assets/fonts/Harrington-Regular.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+.badge-info {color: #d2d2d2;background-color: #3F51B5;}
+h1,h2,h3 { font-family:Harrington, Harrington-Regular, Helvetica, sans-serif;}
+</style>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#9c001e;font-family:Harrington, Harrington-Regular, Helvetica, sans-serif;">
+      <a class="navbar-brand" href="{{ site.url }}">CortesiFood.com</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="height: auto; max-height: 400px; overflow-x: hidden;">
+              {% for category in all_categories %}
+                <a class="dropdown-item" href="{{ site.url }}/categories#{{ category | slugify }}">{{ category }}</a>
+              {% endfor %}
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ingredients
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="height: auto; max-height: 400px; overflow-x: hidden;">
+              {% for ingredient in all_ingredients %}
+                <a class="dropdown-item" href="{{ site.url }}/ingredients#{{ ingredient | slugify }}">{{ ingredient }}</a>
+              {% endfor %}
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2 recipe_search" type="search" placeholder="Search Recipes" aria-label="Search Recipes">
+        </form>
+      </div>
+    </nav>
+
+    <div class="container-fluid" style="margin-top:70px;">
+      <div class="row">
+        <div class="fixed-top col-md-4 col-lg-3 d-none d-md-block" style="margin-top:55px;z-index:0;padding:0px;bottom:0px;background-color:#383d41;">
+          <div class="card" style="border-radius: 0px;background-color: #212529;">
+            <div class="card-header">
+              <form>
+                <div class="form-group" style="margin:0px;">
+                  <input type="text" class="form-control recipe_search" placeholder="Search Recipes">
+                </div>
+              </form>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" style="background-color: #383d41;">
+                {% for category in all_categories %}
+                  <a class="badge badge-info" href="{{ site.url }}/categories#{{ category | slugify }}">{{ category }}</a>
+                {% endfor %}
+              </li>
+              <li class="list-group-item" style="background-color: #383d41;">
+                {% for ingredient in all_ingredients %}
+                  <a class="badge badge-info" href="{{ site.url }}/ingredients#{{ ingredient | slugify }}">{{ ingredient }}</a>
+                {% endfor %}
+              </li>
+              <li class="list-group-item" style="background-color: #383d41;">
+                <a class="badge badge-info" href="https://github.com/timcortesi/cortesifood/edit/master/{{ page.path }}" style="width:100%;font-size:20px;">
+                  Edit This Page
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="offset-md-4 offset-lg-3 col-md-8 col-lg-9">
+          <h1>{% if page.title == blank %} {{ page.name }} {% else %} {{ page.title }} {% endif %}</h1>
+          {% if page.images | pop != blank and page.images | pop != "" %}
+          <div style="float:right;padding:20px 0px 0px 20px;width:320px;" class="d-none d-lg-block">
+            {% for image in page.images %}
+              <img style="width:300px;padding-bottom:20px;"src="{{ site.url }}/images/{{ image }}">
+            {% endfor %}
+          </div>
+          {% endif %}
+          <section>
+            {{ content }}
+
+            <!-- Small Screen Images -->
+            <div class="row">
+              <div class="col-sm-12 d-md-block d-lg-none">
+                {% for image in page.images %}
+                  <img style="width:160px;" style="padding:10px;" src="{{ site.url }}/images/{{ image }}">
+                {% endfor %}
+              </div>
+            </div>
+            <!-- End Small Screen Images -->
+
+            <!-- Begin Categories -->
+            <div class="row">
+              <div class="col-sm-12">
+                  {% for category in page.categories %}
+                    <span class="badge badge-primary">{{ category }}</span>
+                  {% endfor %}
+                  {% for ingredients in page.ingredients %}
+                    <span class="badge badge-primary">{{ ingredients }}</span>
+                  {% endfor %}
+              </div>
+            </div>
+            <!-- End Categories -->
+          </section>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- Footer -->
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{{ site.url }}/assets/js/jquery.autocomplete.js"></script>
+    <script>
+      var recipes = [
+      {% for page in site.pages %}{% if page.dir == "/recipes/" or page.dir == "/recipes2/" %}{
+        "url":`{{ page.url }}`,
+        "value":{% if page.title == blank %} `{{ page.name }}` {% else %} `{{ page.title }}` {% endif %}
+      },{% endif %}{% endfor %}
+      {% for category in all_categories %}{
+        "url":`/categories#{{ category | slugify }}`,
+        "value":`{{ category }}`
+      },{% endfor %}
+      {% for ingredient in all_ingredients %}{
+        "url":`/ingredients#{{ ingredient | slugify }}`,
+        "value":`{{ ingredient }}`
+      },{% endfor %}
+      ];
+      $('.recipe_search').autocomplete({
+          lookup: recipes,
+          onSelect: function (suggestion) {
+              window.location = "{{ site.url }}"+suggestion.url
+          }
+      });
+    </script>
+  </body>
+</html>

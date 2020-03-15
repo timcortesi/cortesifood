@@ -1,0 +1,32 @@
+---
+title: Recipes by Ingredient
+layout: default
+---
+
+{% assign all_ingredients = "" | split: ',' %}
+{% for mypage in site.pages %}
+  {% for myingredient in mypage.ingredients %}
+    {% assign all_ingredients = all_ingredients | push: myingredient | uniq | sort %}
+  {% endfor %}
+{% endfor %}
+<style>
+a.anchor {
+  display: block;
+  position: relative;
+  top: -55px;
+  visibility: hidden;
+}
+h3 {
+  margin-top:20px;
+}
+</style>
+{% for ingredient in all_ingredients %}
+<a class="anchor" name="{{ ingredient | slugify }}"></a><h3>{{ ingredient }}</h3>
+  {% for mypage in site.pages %}
+    {% for myingredient in mypage.ingredients %}
+      {% if ingredient == myingredient %}
+        <a class="badge badge-secondary" href="{{ site.url }}{{ mypage.url }}">{{ mypage.title }}</a>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
