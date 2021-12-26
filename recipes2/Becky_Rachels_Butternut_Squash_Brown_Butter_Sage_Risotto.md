@@ -6,7 +6,7 @@ ingredients: [Egg]
 book2page: 82
 ---
 
-The best part about this recipe is frizzling the sage. Rachel & [are pro sage frizzlers. This recipe is originally from Serious Eats. When we made it we didn't have miso so we just skipped that. I think we skipped the red pepper flakes too because we didn't want it to be too spicy for the kids. If you like you can prep this (through pureeing the squash) on the weekend and then just quickly finish it in the Instant Pot on a weeknight. 
+The best part about this recipe is frizzling the sage. Rachel & I are pro sage frizzlers. This recipe is originally from Serious Eats. When we made it we didn't have miso so we just skipped that. I think we skipped the red pepper flakes too because we didn't want it to be too spicy for the kids. If you like you can prep this (through pureeing the squash) on the weekend and then just quickly finish it in the Instant Pot on a weeknight. 
 
 - 3 1/2 pounds butternut squash, peeled and seeded- 6 tablespoons extra-virgin olive oil, divided
 - 3 medium cloves garlic, crushed
