@@ -5,7 +5,7 @@ categories: [Fehma Food, Book 1]
 ingredients: []
 ---
 
- This is the vegetable side dish
+This is the vegetable side dish
 that Fehma makes with that weird bumpy green vegetable. It cooks down to
 almost nothing, and is rather spicy, but really good!
 
