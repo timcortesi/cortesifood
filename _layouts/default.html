@@ -199,9 +199,8 @@ h1,h2,h3 { font-family:Harrington, Harrington-Regular, Helvetica, sans-serif;}
         ]
       }).on('change',function(form_event) {
         form_data = form_event.form.get();
-        if (form_data.recipe != null && form_data.recipe != '') {
-          debugger;
-          // window.location = "{{ site.url }}"+form_data.recipe
+        if (_.find(recipes,{value:form_data.recipe}) !== undefined) {
+          window.location = "{{ site.url }}"+form_data.recipe;
         }
       })
     </script>
