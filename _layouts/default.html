@@ -72,9 +72,12 @@ h1,h2,h3 { font-family:Harrington, Harrington-Regular, Helvetica, sans-serif;}
             </div>
           </li>
         </ul>
+        <div id="recipe_search_menu"></div>
+        <!--
         <form class="form-inline">
           <input class="form-control mr-sm-2 recipe_search" type="search" placeholder="Search Recipes" aria-label="Search Recipes">
         </form>
+      -->
       </div>
     </nav>
 
@@ -83,11 +86,14 @@ h1,h2,h3 { font-family:Harrington, Harrington-Regular, Helvetica, sans-serif;}
         <div class="fixed-top col-md-4 col-lg-3 d-none d-md-block" style="margin-top:55px;z-index:0;padding:0px;bottom:0px;background-color:#383d41;">
           <div class="card" style="border-radius: 0px;background-color: #212529;">
             <div class="card-header">
+              <div id="recipe_search_sidebar"></div>
+              <!--
               <form>
                 <div class="form-group" style="margin:0px;">
                   <input type="text" class="form-control recipe_search" placeholder="Search Recipes">
                 </div>
               </form>
+              -->
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item" style="background-color: #383d41;">
@@ -151,30 +157,50 @@ h1,h2,h3 { font-family:Harrington, Harrington-Regular, Helvetica, sans-serif;}
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src='/assets/js/vendor/jquery.min.js'></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="{{ site.url }}/assets/js/jquery.autocomplete.js"></script>
+    <script src="/assets/js/vendor/lodash.min.js"></script>
+    <script>_.findWhere = _.find; _.where = _.filter;_.pluck = _.map;_.contains = _.includes;</script>
+    <script src='/assets/js/vendor/gform_bootstrap.js'></script>
     <script>
       var recipes = [
       {% for page in site.pages %}{% if page.dir == "/recipes/" or page.dir == "/recipes2/" %}{
-        "url":`{{ page.url }}`,
-        "value":{% if page.title == blank %} `{{ page.name }}` {% else %} `{{ page.title }}` {% endif %}
+        "value":`{{ page.url }}`,
+        "label":{% if page.title == blank %} `{{ page.name }}` {% else %} `{{ page.title }}` {% endif %}
       },{% endif %}{% endfor %}
       {% for category in all_categories %}{
-        "url":`/categories#{{ category | slugify }}`,
-        "value":`{{ category }}`
+        "value":`/categories#{{ category | slugify }}`,
+        "label":`{{ category }}`
       },{% endfor %}
       {% for ingredient in all_ingredients %}{
-        "url":`/ingredients#{{ ingredient | slugify }}`,
-        "value":`{{ ingredient }}`
+        "value":`/ingredients#{{ ingredient | slugify }}`,
+        "label":`{{ ingredient }}`
       },{% endfor %}
       ];
-      $('.recipe_search').autocomplete({
-          lookup: recipes,
-          onSelect: function (suggestion) {
-              window.location = "{{ site.url }}"+suggestion.url
-          }
-      });
+      // $('#recipe_search').autocomplete({
+      //     lookup: recipes,
+      //     onSelect: function (suggestion) {
+      //         window.location = "{{ site.url }}"+suggestion.url
+      //     }
+      // });
+      new gform({
+        "legend":"",
+        "name": "recipe_search_sidebar",
+        "actions":[],
+        "fields": [
+            {
+                "type": "smallcombo",
+                "label": "",
+                "name": "recipe",
+                "options": recipes
+            }
+        ]
+    }).on('change',function(form_event) {
+      form_data = form_event.form.get();
+      if (form_data.recipe != null && form_data.recipe != '') {
+        window.location = "{{ site.url }}"+form_data.recipe
+      }
+    })
     </script>
   </body>
 </html>
