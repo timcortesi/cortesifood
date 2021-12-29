@@ -161,6 +161,7 @@ h1,h2,h3 { font-family:Harrington, Harrington-Regular, Helvetica, sans-serif;}
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="/assets/js/lodash.min.js"></script>
     <script>_.findWhere = _.find; _.where = _.filter;_.pluck = _.map;_.contains = _.includes;</script>
+    <script src='/assets/js/extras.js'></script>
     <script src='/assets/js/gform_bootstrap.js'></script>
     <script>
       var recipes = [
@@ -186,6 +187,7 @@ h1,h2,h3 { font-family:Harrington, Harrington-Regular, Helvetica, sans-serif;}
       new gform({
         "legend":"",
         "name": "recipe_search_sidebar",
+        "el":"#recipe_search_sidebar",
         "actions":[],
         "fields": [
             {
@@ -195,12 +197,13 @@ h1,h2,h3 { font-family:Harrington, Harrington-Regular, Helvetica, sans-serif;}
                 "options": recipes
             }
         ]
-    }).on('change',function(form_event) {
-      form_data = form_event.form.get();
-      if (form_data.recipe != null && form_data.recipe != '') {
-        window.location = "{{ site.url }}"+form_data.recipe
-      }
-    })
+      }).on('change',function(form_event) {
+        form_data = form_event.form.get();
+        if (form_data.recipe != null && form_data.recipe != '') {
+          debugger;
+          // window.location = "{{ site.url }}"+form_data.recipe
+        }
+      })
     </script>
   </body>
 </html>
