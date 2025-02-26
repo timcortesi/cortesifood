@@ -8,7 +8,7 @@ ingredients: [Chicken]
  Very, very excellent chicken!
 Better than Applebee's! Everyone loves this. (Also known as Tim and
 Stacy's [Engagement
-Chicken](http://cortesifood.com/wiki/Engagement_Chicken_(Chicken_with_Soup_%26_Rice)))
+Chicken](http://cortesifood.com/wiki/Engagement_Chicken_Chicken_with_Soup_&_Rice))
 
 -   1 1/2 lbs. boneless skinless chicken breasts
 
